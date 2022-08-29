@@ -1,0 +1,132 @@
+{% load static %}
+<!doctype html>
+<html dir="rtl" lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static "fonts/icomoon/style.css" %}">
+
+    <link rel="stylesheet" href="{% static "fonts/icomoon/style.css" %}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
+    
+    <!-- Style -->
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+
+    <title>نظريه زبانها و ماشين (Nfa to Dfa)</title>
+  </head>
+  <body>
+  
+
+  <div class="d-lg-flex half">
+    <div class="bg order-1 order-md-2" style="background-image: url('{% static 'images/test.jpg' %}');"></div>
+    <div class="contents order-2 order-md-1">
+
+      <div class="container">
+        <div class="row align-items-center justify-content-center">
+          <div class="col-md-7">
+            <h3>تبدیل <strong>Nfa به Dfa</strong></h3>
+            <p class="mb-4">ساخته شده توسط مهدی رمضانی</p>
+
+            {% if status_set_value == True %}
+            <form method="post">
+                {% csrf_token %}
+              <div class="form-group first">
+                <label for="username">تعداد حالت های ماشین خود را وارد کنید</label>
+                <input type="number" class="form-control" name="n"  value="{{ value1 }}" id="username">
+              </div>
+
+              <div class="form-group last mb-3">
+                <label for="password">تعداد ورودی های ماشین خود را وارد کنید</label>
+                <input type="number" class="form-control" name="t" value="{{ value2 }}" id="password">
+              </div>
+
+              <button type="submit" class="btn btn-block btn-primary">ارسال</button>
+
+            </form>
+            {% endif %}
+              <hr>
+              <br>
+
+          {% if status_convert == True %}
+              <form  method="post">
+                  {% csrf_token %}
+
+                  {% for i in numbers %}
+
+              <div class="form-group first">
+
+                <input type="text" class="form-control" name="state" placeholder="حالت:{{ i }}" id="username">
+              </div>
+
+                  {% for j in numbers2 %}
+
+
+              <div class="form-group last mb-3">
+
+                <input type="text" class="form-control" name="path" placeholder="ورودی:{{ j }}" id="password">
+              </div>
+
+                      <div class="form-group last mb-3">
+
+                <input type="text" class="form-control" name="reaching_state" placeholder="از حالت{{ i }} با ورودی{{ j }}به کجا می رود " id="password">
+              </div>
+
+                      {% endfor %}
+                        <hr>
+                      <br>
+
+              {% endfor %}
+
+              <button type="submit" class="btn btn-block btn-primary">تبدیل</button>
+
+            </form>
+          {% endif %}
+
+          {% if status_final == True %}
+            <form method="post">
+                {% csrf_token %}
+              <div class="form-group first">
+                <label for="username">وضعیت نهایی را وارد کنید</label>
+                <input type="text" class="form-control" name="final"  value="{{ value1 }}" id="username">
+              </div>
+              <button type="submit" class="btn btn-block btn-primary">تبدیل</button>
+          {% endif %}
+
+          {% if show_respons == True %}
+
+                <div class="form-group first">
+
+                {{ response_nfa_pandas.nfa_nfa }}
+                    <br>
+                    <hr>
+                    <br>
+
+
+
+
+                {{ response_nfa_pandas.dfa_dfa }}
+              </div>
+
+          {% endif %}
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+  </div>
+    
+    
+
+    <script src="{% static "js/jquery-3.3.1.min.js" %}"></script>
+    <script src="{% static "js/popper.min.js" %}"></script>
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+    <script src="{% static "js/main.js" %}"></script>
+  </body>
+</html>
